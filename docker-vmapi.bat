@@ -1,3 +1,3 @@
 @echo off
 
-docker exec -it vacation-management-api php /var/www/html/console.php %* 2>NUL
+docker exec -it vacation-management-api php /var/www/html/src/console.php %* 2>NUL
