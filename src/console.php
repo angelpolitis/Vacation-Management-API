@@ -47,7 +47,10 @@
     }
 
     try {
-        echo $console->runCommand(new $class($args), implode(" ", array_slice($argv, 1)));
+        $result = $console->runCommand(new $class($args), implode(" ", array_slice($argv, 1)));
+
+        if (is_scalar($result)) echo $result . "\n";
+        else echo json_encode($result, JSON_PRETTY_PRINT) . "\n";
     }
     catch (Exception $e) {
         $console->warn($e->getMessage());
