@@ -82,17 +82,23 @@
                 $this->unknownFlags[] = $flag;
             }
             
-            try {
-                foreach (static::$optionMap as $option => $property) {
+            foreach (static::$optionMap as $option => $property) {
+                try {
                     $this->{$property} = $this->getOption($option);
                 }
-            }
-            catch (Throwable $e) {
-                $type = (new ReflectionProperty($this, $property))->getType();
+                catch (Throwable $e) {
+                    $property = new ReflectionProperty($this, $property);
 
-                $value = json_encode($this->getOption($option));
+                    if ($property->hasDefaultValue()) {
+                        continue;
+                    }
+                    
+                    $type = $property->getType();
+                    
+                    $value = json_encode($this->getOption($option));
 
-                throw new Exception("The option '$property' of type '$type' can't have the value '$value'.");
+                    throw new Exception("The option '$property' of type '$type' can't have the value '$value'.");
+                }
             }
 
             foreach ($this->getOptions() as $option => $_) {
