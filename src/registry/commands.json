@@ -1,0 +1,67 @@
+{
+    "composer:install": {
+        "name": "composer:install",
+        "class": "App.Commands.Composer.Install",
+        "file": "commands/composer/Install.php"
+    },
+    "db:init": {
+        "name": "db:init",
+        "class": "App.Commands.Database.Init",
+        "file": "commands/database/Init.php"
+    },
+    "db:create": {
+        "name": "db:create",
+        "class": "App.Commands.Database.CreateTable",
+        "file": "commands/database/CreateTable.php"
+    },
+    "db:dump": {
+        "name": "db:dump",
+        "class": "App.Commands.Database.DumpTable",
+        "file": "commands/database/DumpTable.php"
+    },
+    "request:approve": {
+        "name": "request:approve",
+        "class": "App.Commands.ApproveRequest",
+        "file": "commands/ApproveRequest.php"
+    },
+    "request:create": {
+        "name": "request:create",
+        "class": "App.Commands.CreateRequest",
+        "file": "commands/CreateRequest.php"
+    },
+    "request:delete": {
+        "name": "request:delete",
+        "class": "App.Commands.DeleteRequest",
+        "file": "commands/DeleteRequest.php"
+    },
+    "request:reject": {
+        "name": "request:reject",
+        "class": "App.Commands.RejectRequest",
+        "file": "commands/RejectRequest.php"
+    },
+    "requests:fetch": {
+        "name": "requests:fetch",
+        "class": "App.Commands.FetchRequests",
+        "file": "commands/FetchRequests.php"
+    },
+    "user:create": {
+        "name": "user:create",
+        "class": "App.Commands.CreateUser",
+        "file": "commands/CreateUser.php"
+    },
+    "user:delete": {
+        "name": "user:delete",
+        "class": "App.Commands.DeleteUser",
+        "file": "commands/DeleteUser.php"
+    },
+    "user:update": {
+        "name": "user:update",
+        "class": "App.Commands.UpdateUser",
+        "file": "commands/UpdateUser.php"
+    },
+    "users:fetch": {
+        "name": "users:fetch",
+        "class": "App.Commands.FetchUsers",
+        "file": "commands/FetchUsers.php"
+    }
+}
