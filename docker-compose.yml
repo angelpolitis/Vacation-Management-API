@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: vacation-management-api
+    environment:
+      IS_DOCKER: "1"
     ports:
       - "8080:80"
     volumes:
