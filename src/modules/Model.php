@@ -14,6 +14,7 @@
         protected array $autoIncrement = ["id"];
         protected array $passwordFields = ["password"];
         protected array $requiredFields = [];
+        protected array $editableFields = [];
 
         public function __construct (array $data = []) {
             $this->data = $data;
@@ -122,11 +123,21 @@
             $where = $this->data;
 
             if (empty($data)) {
-                throw new InvalidArgumentException("No data provided for update.");
+                throw new InvalidArgumentException("No data provided to update.");
             }
 
             if (empty($where)) {
                 throw new InvalidArgumentException("No conditions provided for update (WHERE clause).");
+            }
+
+            $data = array_filter(
+                $data,
+                fn ($key) => in_array($key, $this->editableFields),
+                ARRAY_FILTER_USE_KEY
+            );
+
+            if (empty($data)) {
+                throw new InvalidArgumentException("All fields provided for update are non-editable.", 1);
             }
 
             foreach ($data as $key => $value) {

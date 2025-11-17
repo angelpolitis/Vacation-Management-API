@@ -5,6 +5,14 @@
     use RuntimeException;
 
     class Request extends Model {
+        protected array $editableFields = [
+            "start_date",
+            "end_date",
+            "reason",
+            "status",
+            "decided_by"
+        ];
+
         protected array $requiredFields = [
             "start_date",
             "end_date",

@@ -4,6 +4,14 @@
     use App\Model;
 
     class User extends Model {
+        protected array $editableFields = [
+            "name",
+            "email",
+            "password",
+            "employee_code",
+            "type"
+        ];
+
         protected array $requiredFields = [
             "name",
             "email",
