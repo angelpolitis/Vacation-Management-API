@@ -60,16 +60,32 @@ Before running the project, ensure you have the following installed:
     1. For Docker:
 
         ```bash
-        docker-vmapi db:init
+        docker-vmapi db:init -f
         ```
      
     2. For localhost:
 
         ```bash
-        vmapi db:init
+        vmapi db:init -f
         ```
 
-5. Access the application in your browser at [http://localhost:8080](http://localhost:8080) and the database via PHPMyAdmin at [http://localhost:8081](http://localhost:8081) (for Docker users).
+5. Optionally, populate the database with dummy data using:
+
+    1. For Docker:
+
+        ```bash
+        docker-vmapi db:seed
+        ```
+     
+    2. For localhost:
+
+        ```bash
+        vmapi db:seed
+        ```
+
+    The password for every seeded user is `12345678`.
+
+6. Access the application in your browser at [http://localhost:8080](http://localhost:8080) and the database via PHPMyAdmin at [http://localhost:8081](http://localhost:8081) (for Docker users).
 
 ---
 
