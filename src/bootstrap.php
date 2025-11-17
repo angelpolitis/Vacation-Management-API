@@ -1,6 +1,7 @@
 <?php
     namespace App;
 
+    use App\Models\User;
     use PDO;
     use PDOException;
 
@@ -13,6 +14,13 @@
     const DB_NAME = "vacation_management_api";
 
     define("App\\DB_HOST", getenv("IS_DOCKER") == 1 ? "db" : "127.0.0.1");
+
+    @session_start();
+
+    define("USER_ID", $_SESSION["user_id"] ?? null);
+
+    # Hide deprecation warnings that may occur due to outdated third-party libraries.
+    error_reporting(E_ALL & ~E_DEPRECATED);
 
     # Register a autoloader that includes modules whose namespace follows folder structure.
     spl_autoload_register(function ($class) {
@@ -42,6 +50,8 @@
         if (is_file($path)) require_once $path;
     });
 
+    define("IS_MANAGER", ((User::select(["id" => USER_ID], ["type"])[0] ?? [])["type"] ?? null) === "manager" ?? false);
+
     /**
      * Attempts to establish a database connection via PDO.
      * @throws PDOException If the operation fails.
@@ -67,5 +77,40 @@
         }
 
         return $pdo;
+    }
+
+    function jsonInput (): array {
+        $raw = file_get_contents("php://input");
+        return json_decode($raw, true) ?? $_POST ?? [];
+    }
+    
+    function jsonResponse ($data, int $code = 200): string {
+        http_response_code($code);
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        return '';
+    }
+    
+    function guardAgainstGuest () : void {
+        if (USER_ID === null) {
+            echo jsonResponse(["status" => false, "error" => "Unauthorised"], 401);
+            exit;
+        }
+    }
+
+    function guardAgainstEmployee () : void {
+        guardAgainstGuest();
+
+        $userType = User::select(["id" => USER_ID], ["type"])[0] ?? null;
+
+        if ($userType === null) {
+            $_SESSION["user_id"] = null;
+            guardAgainstGuest();
+        }
+
+        if ($userType["type"] !== "manager") {
+            echo jsonResponse(["status" => false, "error" => "Forbidden"], 403);
+            exit;
+        }
     }
 ?>
