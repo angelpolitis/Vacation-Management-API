@@ -1,0 +1,21 @@
+td form {
+    display: inline-block;
+}
+
+.mid-cta {
+    display: inline-block;
+    background-color: #f0ba07;
+    text-decoration: none;
+    font-weight: normal;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.mid-cta:hover {
+    background-color: #e7aa01;
+}
