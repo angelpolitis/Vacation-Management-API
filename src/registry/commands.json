@@ -19,6 +19,11 @@
         "class": "App.Commands.Database.DumpTable",
         "file": "commands/database/DumpTable.php"
     },
+    "db:seed": {
+        "name": "db:seed",
+        "class": "App.Commands.Database.Seed",
+        "file": "commands/database/Seed.php"
+    },
     "request:approve": {
         "name": "request:approve",
         "class": "App.Commands.ApproveRequest",
